@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>maakleritasu.ee — Sina ei pidanud vahendustasu maksma</title>
+<meta name="description" content="Eestis on maakleritasu nõudmine üürnikult seadusega vastuolus. Kohtupraktikat pole. Pretsedenti pole. Veel mitte. Aga varsti on.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --bg:#faf7f2;
+  --white:#ffffff;
+  --ink:#1E1A14;
+  --ink2:#5A4A35;
+  --ink3:#7A6A52;
+  --muted:#bbbbbb;
+  --border:#EDE8DF;
+  --border2:#e2d8c8;
+  --green:#2D4A3E;
+  --green-dark:#1A2E25;
+  --terracotta:#C8703A;
+  --gold:#E8B97A;
+  --card-bg:#FAF7F2;
+  --radius:8px;
+  --max:860px;
+}
+
+body{
+  font-family:'Source Sans 3',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.7;
+}
+
+a{color:var(--terracotta);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.container{max-width:var(--max);margin:0 auto;padding:0 2rem}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,247,242,0.97);
+  backdrop-filter:blur(8px);
+  padding:.85rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid transparent;
+  transition:border-color .3s;
+}
+nav.scrolled{border-bottom-color:var(--border)}
+.nav-logo{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.1rem;font-weight:700;
+  color:var(--ink);letter-spacing:.05em;
+  text-decoration:none;
+}
+.nav-logo span{color:var(--terracotta);font-style:italic}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{
+  color:var(--ink2);font-size:.82rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;
+  text-decoration:none;transition:color .15s;
+}
+.nav-links a:hover{color:var(--terracotta)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:8rem 2rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(at 70% 50%, rgba(200,112,58,.06) 0%, transparent 60%),
+    radial-gradient(at 20% 80%, rgba(45,74,62,.05) 0%, transparent 50%);
+  pointer-events:none;
+}
+.hero-inner{max-width:var(--max);margin:0 auto;width:100%}
+.hero-eyebrow{
+  display:inline-block;
+  background:var(--green);color:var(--gold);
+  font-size:.62rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  padding:.35rem 1rem;border-radius:2px;margin-bottom:2rem;
+}
+.hero h1{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(2.5rem,7vw,5rem);
+  font-weight:700;line-height:1.1;
+  color:var(--ink);margin-bottom:2rem;max-width:720px;
+}
+.hero h1 em{color:var(--terracotta);font-style:italic}
+.hero-sub{
+  font-size:clamp(1rem,2vw,1.15rem);
+  color:var(--ink2);font-weight:300;
+  max-width:580px;margin-bottom:3rem;line-height:1.8;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-green{
+  display:inline-block;
+  background:var(--green);color:var(--bg);
+  font-weight:700;font-size:1rem;padding:1rem 2.5rem;
+  border-radius:var(--radius);text-decoration:none;
+  transition:background .2s;letter-spacing:.02em;
+}
+.btn-green:hover{background:var(--green-dark);color:var(--bg)}
+.btn-outline{
+  display:inline-block;
+  background:transparent;color:var(--ink2);
+  font-weight:600;font-size:1rem;padding:1rem 2rem;
+  border-radius:var(--radius);border:1.5px solid var(--border2);
+  text-decoration:none;transition:border-color .2s;
+}
+.btn-outline:hover{border-color:var(--ink2);color:var(--ink)}
+.hero-campaign{
+  margin-top:4rem;padding-top:2rem;
+  border-top:1px solid var(--border2);
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+}
+.hero-campaign span{font-size:.72rem;color:var(--muted)}
+.hero-campaign a{
+  font-size:.85rem;font-weight:700;color:var(--terracotta);
+  border-bottom:1px solid rgba(200,112,58,.3);padding-bottom:1px;
+}
+
+/* SECTIONS */
+section{padding:6rem 0}
+section.bg-white{background:var(--white)}
+section.bg-green{background:var(--green);color:var(--bg)}
+section.bg-green-dark{background:var(--green-dark);color:var(--bg)}
+
+.section-label{
+  font-size:.62rem;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--terracotta);
+  margin-bottom:1rem;
+}
+.section-label.light{color:var(--gold)}
+h2{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(1.6rem,3vw,2rem);
+  font-weight:400;font-style:italic;
+  line-height:1.4;color:var(--ink);margin-bottom:1.5rem;
+}
+h2.light{color:var(--bg)}
+h2.bold{font-weight:700;font-style:normal}
+h3{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+h3.light{color:var(--bg)}
+p{color:var(--ink2);margin-bottom:1rem;font-weight:300;line-height:1.85}
+p:last-child{margin-bottom:0}
+p.light{color:rgba(250,247,242,.7)}
+
+/* LAW BLOCK */
+.law-block{
+  background:var(--white);border-left:4px solid var(--green);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.5rem 1.75rem;margin:2rem 0;
+}
+.law-block p{color:var(--ink2);font-size:.95rem}
+.law-block cite{display:block;font-size:.82rem;color:var(--ink3);margin-top:.75rem;font-style:italic}
+
+/* WARNING */
+.warning{
+  background:#fff5f5;border-left:4px solid #b83232;
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:.92rem;color:#8B2020;
+}
+
+/* CHECKLIST */
+.checklist{list-style:none;margin:1.5rem 0}
+.checklist li{
+  padding:.65rem 0;border-bottom:1px solid var(--border);
+  display:flex;gap:1rem;align-items:flex-start;
+  font-size:.95rem;color:var(--ink2);font-weight:300;
+}
+.checklist li:last-child{border-bottom:none}
+.check-icon{color:var(--terracotta);flex-shrink:0;margin-top:.1rem}
+
+/* ALERT BOX */
+.alert-box{
+  background:#fff8f3;border:1px solid #e8c8a8;
+  border-radius:var(--radius);padding:1.25rem 1.5rem;
+  margin:1.5rem 0;font-size:.92rem;color:var(--ink2);
+}
+.alert-box strong{color:var(--terracotta)}
+
+/* STEPS */
+.steps{display:grid;gap:2rem;margin-top:2rem}
+.step{display:flex;gap:1.5rem;align-items:flex-start}
+.step-num{
+  flex-shrink:0;width:2.5rem;height:2.5rem;
+  background:var(--green);color:var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:1rem;margin-top:.15rem;
+  font-family:'Playfair Display',serif;
+}
+.step-body h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.step-body p{font-size:.92rem;color:var(--ink2);margin-bottom:.5rem}
+.step-note{font-size:.82rem;color:var(--ink3);font-style:italic}
+
+/* TWO COLS */
+.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.col-card{background:var(--bg);border-radius:var(--radius);padding:1.25rem}
+.col-card strong{display:block;margin-bottom:.4rem;color:var(--green);font-size:.9rem}
+.col-card span{font-size:.85rem;color:var(--ink2)}
+
+/* FORM SECTION */
+.form-section{background:var(--green);padding:5rem 0}
+.form-section .section-label{color:var(--gold)}
+.form-section h2{color:var(--bg)}
+.form-section p{color:rgba(250,247,242,.75);font-weight:300}
+.form-section a{color:var(--gold)}
+
+.form-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;padding:2.5rem;margin-top:2rem;
+}
+.form-label{
+  display:block;font-size:.88rem;color:rgba(255,255,255,.75);
+  margin-bottom:.4rem;font-weight:600;
+}
+.form-input{
+  width:100%;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);
+  padding:.75rem 1rem;color:#fff;font-size:.95rem;
+  font-family:'Source Sans 3',sans-serif;margin-bottom:1.25rem;
+  transition:border-color .2s;
+}
+.form-input:focus{outline:none;border-color:var(--gold)}
+.form-input::placeholder{color:rgba(255,255,255,.3)}
+textarea.form-input{min-height:110px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.radio-group{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.radio-label{display:flex;align-items:center;gap:.5rem;font-size:.88rem;color:rgba(255,255,255,.75);cursor:pointer}
+.radio-label input{accent-color:var(--gold);width:16px;height:16px}
+.info-box{
+  background:rgba(255,255,255,.06);border-radius:var(--radius);
+  padding:.9rem 1.1rem;margin-bottom:1.25rem;
+  font-size:.85rem;color:rgba(255,255,255,.65);
+}
+.info-box strong{color:rgba(255,255,255,.9)}
+.btn-submit{
+  width:100%;background:var(--terracotta);color:#fff;
+  font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;
+  padding:1rem;border:none;border-radius:var(--radius);cursor:pointer;
+  transition:background .2s;margin-top:.5rem;letter-spacing:.02em;
+}
+.btn-submit:hover{background:#a85a28}
+.consent{display:flex;gap:.75rem;align-items:flex-start;margin-top:1rem}
+.consent input{flex-shrink:0;margin-top:.25rem;accent-color:var(--gold);width:16px;height:16px}
+.consent span{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.6}
+.hashtag-note{
+  font-size:.82rem;color:rgba(255,255,255,.5);
+  margin-top:1rem;text-align:center;
+}
+.hashtag-note strong{color:var(--gold)}
+
+.rada-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.rada-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius);padding:1.25rem;
+}
+.rada-label{font-size:.72rem;color:var(--gold);font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.rada-title{color:#fff;font-weight:700;font-size:.95rem;margin-bottom:.4rem}
+.rada-desc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6}
+
+/* STORIES */
+.stories-placeholder{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:12px;padding:2.5rem;text-align:center;margin-top:2rem;
+}
+.stories-placeholder p{color:var(--ink2);margin-bottom:.5rem}
+.stories-placeholder p:first-child{font-size:1.05rem;color:var(--ink)}
+
+/* FUND */
+.fund-box{
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:14px;padding:2.5rem;margin-top:2rem;text-align:center;
+}
+.fund-label{font-size:.72rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.fund-amount{
+  font-family:'Playfair Display',serif;
+  font-size:3.5rem;font-weight:700;color:var(--ink);margin:.5rem 0;
+}
+.fund-sub{font-size:.9rem;color:var(--ink3);margin-bottom:1.5rem}
+.progress-bar{background:var(--border);border-radius:99px;height:8px;overflow:hidden;margin:1rem 0}
+.progress-fill{background:var(--terracotta);height:100%;border-radius:99px;width:0%}
+.progress-text{font-size:.82rem;color:var(--ink3);margin-bottom:1.5rem}
+.fund-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.btn-terracotta{
+  display:inline-block;background:var(--terracotta);color:#fff;
+  font-weight:700;padding:.85rem 2rem;border-radius:var(--radius);
+  text-decoration:none;font-size:.95rem;transition:background .2s;
+}
+.btn-terracotta:hover{background:#a85a28;color:#fff}
+.btn-outline-dark{
+  display:inline-block;background:transparent;
+  border:2px solid var(--ink);color:var(--ink);
+  font-weight:600;padding:.8rem 2rem;border-radius:var(--radius);
+  text-decoration:none;font-size:.95rem;transition:all .2s;
+}
+.btn-outline-dark:hover{background:var(--ink);color:#fff}
+
+/* BANK TABLE */
+.bank-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:1rem;text-align:left}
+.bank-table tr{border-bottom:1px solid var(--border)}
+.bank-table tr:last-child{border-bottom:none}
+.bank-table td{padding:.55rem 0;color:var(--ink2)}
+.bank-table td:first-child{color:var(--ink3);width:35%;font-size:.82rem}
+.bank-table td:last-child{font-weight:600;color:var(--ink);font-family:monospace}
+
+/* SOURCES */
+.sources-list{list-style:none;margin-top:1.5rem}
+.sources-list li{
+  padding:.85rem 0;border-bottom:1px solid var(--border);
+  font-size:.9rem;display:flex;gap:.75rem;align-items:flex-start;
+}
+.sources-list li:last-child{border-bottom:none}
+.source-tag{
+  display:inline-block;flex-shrink:0;
+  font-size:.72rem;background:var(--bg);border:1px solid var(--border2);
+  color:var(--terracotta);padding:.1rem .5rem;border-radius:4px;font-weight:600;
+  margin-top:.1rem;
+}
+.sources-list a{color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
+.sources-list a:hover{color:var(--terracotta)}
+
+/* FOOTER */
+footer{
+  background:var(--ink);color:rgba(250,247,242,.6);
+  padding:3rem 2rem;
+}
+.footer-inner{
+  max-width:var(--max);margin:0 auto;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  flex-wrap:wrap;gap:2rem;
+}
+.footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;color:#faf7f2;margin-bottom:.5rem;
+}
+.footer-logo span{color:var(--terracotta)}
+.footer-meta{font-size:.75rem;line-height:1.7}
+.footer-cols{display:flex;gap:3rem;flex-wrap:wrap}
+.footer-col-label{
+  font-size:.6rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:#555;margin-bottom:.8rem;
+}
+.footer-col a,.footer-col span{
+  display:block;font-size:.82rem;color:rgba(250,247,242,.6);
+  padding:.2rem 0;text-decoration:none;transition:color .15s;
+}
+.footer-col a:hover{color:var(--terracotta)}
+.footer-col a.highlight{color:var(--terracotta)}
+.footer-bottom{
+  max-width:var(--max);margin:2rem auto 0;
+  padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:.5rem;font-size:.65rem;color:#555;
+}
+
+/* MODAL */
+.modal-wrap{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.6);z-index:9999;
+  align-items:center;justify-content:center;padding:1.5rem;
+}
+.modal-wrap.open{display:flex}
+.modal{
+  background:#fff;border-radius:14px;
+  max-width:560px;width:100%;
+  padding:2.5rem;position:relative;
+  max-height:85vh;overflow-y:auto;
+}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;
+  background:none;border:none;font-size:1.5rem;
+  cursor:pointer;color:var(--ink3);line-height:1;
+}
+.modal h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;margin-bottom:.75rem;color:var(--ink);
+}
+.modal pre{
+  white-space:pre-wrap;font-family:'Source Sans 3',sans-serif;
+  font-size:.88rem;color:var(--ink2);line-height:1.7;
+  background:var(--bg);padding:1.25rem;border-radius:var(--radius);
+}
+.modal .btn-copy{
+  display:block;width:100%;margin-top:1rem;
+  background:var(--ink);color:#fff;
+  font-family:'Source Sans 3',sans-serif;
+  font-size:.95rem;font-weight:600;padding:.8rem;
+  border:none;border-radius:var(--radius);cursor:pointer;
+}
+.modal .btn-copy:hover{background:var(--green)}
+
+/* ADVOKAAT MODAL */
+#advokaat-modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.6);z-index:9999;
+  align-items:center;justify-content:center;padding:1.5rem;
+}
+#advokaat-modal.open{display:flex}
+#advokaat-modal .modal-inner{
+  background:#fff;border-radius:14px;max-width:520px;width:100%;
+  padding:2.5rem;position:relative;max-height:85vh;overflow-y:auto;
+}
+.adv-label{display:block;font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:.4rem}
+.adv-input{
+  width:100%;border:1px solid var(--border2);border-radius:var(--radius);
+  padding:.7rem 1rem;font-size:.95rem;font-family:'Source Sans 3',sans-serif;
+  margin-bottom:1rem;color:var(--ink);background:#fff;box-sizing:border-box;
+}
+.adv-input:focus{outline:none;border-color:var(--green)}
+textarea.adv-input{min-height:100px;resize:vertical}
+
+@media(max-width:640px){
+  .form-row,.two-cols,.rada-grid,.fund-btns{grid-template-columns:1fr}
+  .fund-btns{flex-direction:column;align-items:center}
+  .hero-btns{flex-direction:column}
+  .footer-inner{flex-direction:column}
+  .footer-cols{gap:2rem}
+  nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">maakleritasu<span>.ee</span></a>
+  <ul class="nav-links">
+    <li><a href="#probleem">Probleem</a></li>
+    <li><a href="#kaebus">Esita kaebus</a></li>
+    <li><a href="#protsess">Juhend</a></li>
+    <li><a href="#lood">Lood</a></li>
+    <li><a href="#fond">Toeta</a></li>
+    <li><a href="#allikad">Allikad</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Kampaania MTÜ Emale poolt</div>
+    <h1>Sina ei pidanud<br><em>vahendustasu maksma.</em></h1>
+    <p class="hero-sub">Eestis on maakleritasu nõudmine üürnikult levinud praktika aga see on tegelikult seadusega vastuolus. Ometi teeb seda peaaegu iga maakler ja iga inimene Eestis on mingil viisil ise kogenud või tunneb kedagi, kes on pidanud seda ebaseaduslikku tasu maksma. Kohtupraktikat veel pole sest inimesed ei ole teadnud või jaksanud vastu hakata. Pretsedenti pole. Veel mitte. Aga varsti on.</p>
+    <div class="hero-btns">
+      <a href="#kaebus" class="btn-green">Esita kaebus TTJA-le</a>
+      <a href="#probleem" class="btn-outline">Loe lähemalt</a>
+    </div>
+    <div class="hero-campaign">
+      <span>MTÜ Emale algatas ka kampaania:</span>
+      <a href="https://mtuemale.ee" target="_blank">#mtuemale →</a>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEEM -->
+<section id="probleem" class="bg-white">
+  <div class="container">
+    <div class="section-label">Mis toimub</div>
+    <h2>Miks see on ebaseaduslik</h2>
+    <p>Maaklerid pakuvad juba aastakümneid Eestis kinnisvara omanikele oma üürniku otsimise teenust ja väidavad, et see on neile tasuta. Igaüks, kes on ise korterit välja üürinud, teab, kui agressiivselt maaklerid helistavad ja üritavad oma "tasuta" teenust pakkuda.</p>
+    <p>Omanikule osutatakse kinnisvara väljaüürimiseks teenust ilma, et see talle midagi maksma läheks. Sina, üürnik, aga saad hoopis ise selle teenuse eest arve olemata mingit teenust tellinud. Maaklerid nimetavad seda "kokkuleppeks." Seadus nimetab seda teisiti. Teenuse eest peab tasuma see, kes teenuse on tellinud.</p>
+    <p>Kui sina üürnikuna pole just palganud endale ise ühte maaklerit, kes kammib sinu eest kuulutusi läbi ja käib sobivaid kortereid sinu eest vaatamas, siis pole sa maakleri teenust tellinud.</p>
+
+    <div class="law-block">
+      <p><strong>Võlaõigusseadus § 658 lg 1:</strong><br>Maaklerilepinguga kohustub üks isik (maakler) vahendama teisele isikule (käsundiandja/omanik) lepingu sõlmimist kolmanda isikuga (üürnikuga) — käsundiandja/omanik aga kohustub maksma talle selle eest tasu. Maakleritasu maksab see, kes maakleri palkas.</p>
+      <cite>VÕS § 658, Riigi Teataja</cite>
+    </div>
+
+    <p>Seega, omanik tellis maaklerilt teenuse. Sina ei palganud mitte kedagi aga maksid. Ja kui üritad keelduda vahendustasu maksmisest siis teatakse sulle, et järgmine kandidaat on juba ukse taga. See pole vabatahtlik kokkulepe. See on inimeste sundseisu ärakasutamine ja kartelli kokkulepe. Inimesed vajavad kodu ja seega nad maksavad selle. Paljud isegi ei tea, et see ei ole Eesti seadustega kooskõlas aga südames tunnevad, et see on ebaõiglane.</p>
+
+    <div class="warning">
+      Eluruumi üürnikule maakleritasu panemine on Justiitsministeeriumi hinnangul õiguslikult küsitav — kuna seaduse eesmärk on vabastada üürnik kuludest, mis pole otseselt seotud eluruumi kasutamisega. (Indrek Niklus, Justiitsministeerium, 2017)
+    </div>
+
+    <p>Saksamaa keelas selle praktika 2020. aastal seadusega — nn <em>Bestellerprinzip</em> ehk "tellija maksab" põhimõte. Eestis kehtib sama loogika juba VÕS § 658 kaudu, kuid keegi pole seda kohtus rakendanud. Kuni praeguseni.</p>
+  </div>
+</section>
+
+<!-- KONTROLL -->
+<section id="kontroll">
+  <div class="container">
+    <div class="section-label">Kontrolli kas see on sinu lugu</div>
+    <h2>Kas sinuga juhtus ka nii?</h2>
+    <p>Sinu olukord sobib kaebuseks kui:</p>
+    <ul class="checklist">
+      <li><span class="check-icon">✦</span><span>Maksid maaklerile vahendustasu üürikorteri saamiseks, ilma teenust tellimata</span></li>
+      <li><span class="check-icon">✦</span><span>Maakler pakkus omanikule teenust tasuta või soodsamalt</span></li>
+      <li><span class="check-icon">✦</span><span>Sul polnud tegelikku valikut — ilma tasuta poleks sa korterit saanud</span></li>
+      <li><span class="check-icon">✦</span><span>Tasu maksti maaklerile arve alusel</span></li>
+    </ul>
+    <p style="margin-top:1.5rem;font-size:.92rem;color:var(--ink3)">Mida sul kaebuse esitamise jaoks vaja läheb: maakleri nimi ja firma, vahendustasu suurus, kuupäev, maksekinnituse väljavõte (piisab pangakonto kannete lehest, kus makse näha / arve). Maaklerilepingust koopia on pluss, aga pole kohustuslik.</p>
+    <div class="alert-box" style="margin-top:1.5rem">
+      <strong>⚠ Tähtaeg:</strong> Raha tagasi nõudmiseks on sul <strong>3 aastat maksepäevast</strong>. TTJA kaebuse jaoks pole tähtaega — aga kohtusse minekuks on.
+    </div>
+  </div>
+</section>
+
+<!-- KAEBUSVORM -->
+<div id="kaebus" class="form-section">
+  <div class="container">
+    <div class="section-label">Tee midagi juba täna</div>
+    <h2>Esita kaebus Tarbijakaitse ja Tehnilise Järelevalve Ametile</h2>
+    <p><a href="https://ttja.ee" target="_blank">Tarbijakaitse ja Tehnilise Järelevalve Amet (TTJA)</a> on riiklik asutus, mis tegeleb tarbijate kaitsega ebaseadusliku äritegevuse eest. Mida rohkem kaebuseid esitame, seda suurem on surve tegutsemiseks.</p>
+
+    <div class="rada-grid">
+      <div class="rada-card">
+        <div class="rada-label">Rada 1 — lihtsam</div>
+        <div class="rada-title">E-kiri</div>
+        <div class="rada-desc">Kopeeri allolev tekst → saada e-kirjaga <strong style="color:var(--gold)">info@ttja.ee</strong> → lisa manuseks maksekinnitus</div>
+      </div>
+      <div class="rada-card">
+        <div class="rada-label">Rada 2 — ametlikum</div>
+        <div class="rada-title">TTJA e-teenindus</div>
+        <div class="rada-desc">Mine <a href="https://ttja.ee" target="_blank">ttja.ee</a> → logi ID-kaardi või Mobiil-ID-ga → täida avaldus otse süsteemis</div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-row">
+        <div>
+          <label class="form-label">Maakleri nimi (kui tead)</label>
+          <input type="text" id="maakler-nimi" class="form-input" placeholder="nt Jaan Tamm">
+        </div>
+        <div>
+          <label class="form-label">Maaklerifirma</label>
+          <input type="text" id="maakler-firma" class="form-input" placeholder="nt Uus Maa, Pindi, Remax…">
+        </div>
+      </div>
+      <label class="form-label">Millal tasu maksid?</label>
+      <input type="text" id="kuupaev" class="form-input" placeholder="nt jaanuar 2024">
+      <label class="form-label">Kui suur oli tasu (€)?</label>
+      <input type="text" id="summa" class="form-input" placeholder="nt 650">
+      <label class="form-label">Linn / piirkond</label>
+      <input type="text" id="linn" class="form-input" placeholder="nt Tallinn, Tartu…">
+      <label class="form-label">Kirjelda lühidalt mis juhtus</label>
+      <textarea id="kirjeldus" class="form-input" placeholder="Maakler võttis minult tasu, kuigi pakkus omanikule teenust tasuta…"></textarea>
+      <label class="form-label">Kas soovid jagada oma lugu ka siin kodulehel? (anonüümselt)</label>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="jaga" value="jah" checked> Jah, anonüümselt</label>
+        <label class="radio-label"><input type="radio" name="jaga" value="ei"> Ei</label>
+      </div>
+      <div class="info-box">
+        <strong>TTJA vajab sinu kontaktandmeid</strong> — anonüümset kaebust ei menetleta. Sinu nimi ja e-post lähevad ainult TTJA-le, mitte avalikuks.
+      </div>
+      <label class="form-label">Sinu nimi</label>
+      <input type="text" id="nimi" class="form-input" placeholder="Eesnimi Perenimi">
+      <label class="form-label">E-post (TTJA vastab sulle)</label>
+      <input type="email" id="email" class="form-input" placeholder="sinu@email.ee">
+      <button class="btn-submit" onclick="genereeriKaebus()">Genereeri kaebuse tekst →</button>
+      <div class="consent">
+        <input type="checkbox" id="consent" checked>
+        <span>Mõistan, et see vahend genereerib kaebuse teksti minu andmete põhjal. Teksti ei salvestata — see kuvatakse ainult minu ekraanil. Kaebuse esitan mina ise TTJA-le.</span>
+      </div>
+      <p class="hashtag-note">Pärast kaebuse saatmist jaga sotsiaalmeedias: <strong>#maaklervaletab #kartell #esitasinkaebuse</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: kaebus -->
+<div class="modal-wrap" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="sulgeModal()">×</button>
+    <h3>Sinu kaebus on valmis</h3>
+    <p style="font-size:.88rem;color:var(--ink3);margin-bottom:1rem">Kopeeri tekst ja saada e-posti teel: <strong>info@ttja.ee</strong> — teema: "Kaebus maakleritasu ebaseadusliku nõudmise kohta". Lisa manuseks maksekinnitus.</p>
+    <pre id="kaebus-tekst"></pre>
+    <button class="btn-copy" onclick="kopeeeri()">Kopeeri tekst lõikelauale</button>
+    <p style="font-size:.78rem;color:var(--ink3);margin-top:1rem;text-align:center">Lisa e-kirjale manuseks pangakonto väljavõte kus makse näha.</p>
+  </div>
+</div>
+
+<!-- PROTSESS -->
+<section id="protsess" class="bg-white">
+  <div class="container">
+    <div class="section-label">Samm-sammuline juhend</div>
+    <h2>Kuidas oma raha tagasi saada</h2>
+    <p>Järgi neid samme järjekorras. Igal sammul on tähtaeg — ära oota.</p>
+
+    <div class="alert-box">
+      <strong>⚠ Tähtaeg:</strong> Raha tagasi nõudmiseks on sul <strong>3 aastat maksepäevast</strong>. Ära oota.
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Saada kirjalik nõue maakleribüroole</h3>
+          <p>Kasuta meie vormi et genereerida nõudekirja tekst. Saada see e-kirjaga maakleribüroo üldaadressile. Bürool on seaduse järgi <strong>15 päeva</strong> vastamiseks.</p>
+          <p class="step-note">Mida lisada: kirjelda olukorda, nimeta summa, viita VÕS § 658 lg 1 ja nõua tasu tagastamist.</p>
+          <a href="#kaebus" class="btn-green" style="display:inline-block;margin-top:.75rem;font-size:.9rem;padding:.6rem 1.25rem">Genereeri nõudekirja tekst →</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Oota büroo vastust — 15 päeva</h3>
+          <p>Kui büroo maksab tagasi — suurepärane. Kui keeldub või ei vasta 15 päeva jooksul — liigu edasi järgmise sammuga.</p>
+          <p class="step-note">Hoia kiri alles — seda läheb vaja tarbijavaidluste komisjoni avalduses.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Esita avaldus Tarbijavaidluste Komisjonile</h3>
+          <p>Tarbijavaidluste komisjon on tasuta, sõltumatu ja lahendab vaidluse kuni 90 päevaga. Komisjoni otsus on büroole täitmiseks kohustuslik.</p>
+          <div class="two-cols">
+            <div class="col-card">
+              <strong>Elektrooniliselt</strong>
+              <span>ttja.ee e-teenindus — kiireim viis, tuvasta end ID-kaardi või Mobiil-ID-ga</span>
+            </div>
+            <div class="col-card">
+              <strong>E-postiga</strong>
+              <span>komisjon@ttja.ee — lisa nõudekiri, büroo vastus ja maksekinnitus</span>
+            </div>
+          </div>
+          <p class="step-note" style="margin-top:.75rem">Komisjon lahendab ainult vaidlusi Eestis registreeritud ettevõtjatega. Avalduse saab esitada ainult eesti keeles.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Paralleelselt: teata TTJA-le</h3>
+          <p>TTJA kaebus ei anna sulle raha tagasi, aga sunnib büroot muutma oma praktikat. Mida rohkem kaebusi, seda suurem surve.</p>
+          <p class="step-note">Saada vabas vormis kiri: <a href="mailto:info@ttja.ee">info@ttja.ee</a> — kirjelda olukorda ja viita VÕS § 658 lg 1.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Kui komisjon ei aita — kohtusse</h3>
+          <p>Maakohus, hagimenetlus. Riigilõiv sõltub nõude suurusest — 500€ nõude puhul umbes 100€. Kui võidad, mõistab kohus kulud kostjalt välja.</p>
+          <p class="step-note">Esimese julge inimese kohtumenetluse kulud katame <a href="#fond">annetustest kogutud fondist</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOD -->
+<section id="lood">
+  <div class="container">
+    <div class="section-label">Inimeste kogemused</div>
+    <h2>Sa pole üksi</h2>
+    <p>Igal aastal maksavad tuhanded üürnikud Eestis tasu, mida nad ei pidanud maksma. Siin on mõned lood — kõik lood on anonüümsed.</p>
+    <div class="stories-placeholder">
+      <p>Siin hakkavad ilmuma päriselt inimeste lood.</p>
+      <p style="font-size:.92rem;color:var(--ink3)">Oled maksnud maaklerile? Jaga oma kogemust vormi kaudu — avaldame selle sinu nõusolekul anonüümselt.</p>
+      <a href="#kaebus" class="btn-green" style="display:inline-block;margin-top:1.5rem;font-size:.95rem">Jaga oma lugu →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOND -->
+<section id="fond" class="bg-white">
+  <div class="container">
+    <div class="section-label">Esimene pretsedent</div>
+    <h2>Keegi peab esimesena kohtusse minema</h2>
+    <p>Üks tugev kohtuotsus muudab kõigi teiste jaoks ka olukorra paremaks. Selleks on vaja üht julget inimest — ja advokaati, kes näeb siin pretsedendi loomise võimalust.</p>
+
+    <div class="fund-box">
+      <div class="fund-label">Esimese kaasuse kulude fond</div>
+      <div class="fund-amount">1 500 €</div>
+      <div class="fund-sub">Katab riigilõivu (~150€) + advokaadi esialgse ettevalmistuse + puhvri</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+      <div class="progress-text" id="progress-text">0 € kogutud 1500 € eesmärgist</div>
+      <div class="fund-btns">
+        <a href="https://mtuemale.ee" target="_blank" class="btn-terracotta">Anneta MTÜ Emale kaudu</a>
+        <button class="btn-outline-dark" onclick="document.getElementById('advokaat-modal').classList.add('open')">Olen advokaat — kirjutan</button>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:left">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--terracotta);margin-bottom:1rem">Pangaülekandega</div>
+        <table class="bank-table">
+          <tr><td>Saaja</td><td>MTÜ Emale</td></tr>
+          <tr><td>IBAN</td><td>EE687700771013234396</td></tr>
+          <tr><td>Pank</td><td>LHV Pank</td></tr>
+          <tr><td>BIC/SWIFT</td><td>LHVBEE22</td></tr>
+          <tr><td>Selgitus</td><td>Maakleritasu fond</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem">
+      <h3>Kutsume advokaati paati</h3>
+      <p>Otsime advokaati, kes soovib olla esimene Eestis, kes viib selle kaasuse kohtusse. Teema on ajakirjanduslikult põnev, õiguslik alus tugev (VÕS § 658) ja avalik huvi suur. Esimese kaasuse kulud kaetakse annetustest kogutud fondist. Koos oleme tugevamad.</p>
+      <p>Kirjuta: <a href="mailto:maakleritasu@proton.me">maakleritasu@proton.me</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ALLIKAD -->
+<section id="allikad">
+  <div class="container">
+    <div class="section-label">Õiguslik alus</div>
+    <h2>Allikad ja viited</h2>
+    <p>See kampaania põhineb Eesti seadusel, ametlikel seisukohtadel ja akadeemilisel analüüsil.</p>
+    <ul class="sources-list">
+      <li><span class="source-tag">Seadus</span><a href="https://www.riigiteataja.ee/akt/974668" target="_blank">Võlaõigusseadus § 658 lg 1 — maakleritasu maksmise kohustus</a></li>
+      <li><span class="source-tag">Riiklik seisukoht</span><a href="https://www.err.ee/581013/seadusest-hoolimata-jaab-maakleritasu-enamasti-uurniku-kanda" target="_blank">ERR (2017) — "Seadusest hoolimata jääb maakleritasu enamasti üürniku kanda" — Justiitsministeeriumi õiguspoliitika talituse juhataja Indrek Nikluse seisukoht</a></li>
+      <li><span class="source-tag">Akadeemiline</span><a href="https://digikogu.taltech.ee/et/Download/88f124e5-ac77-43d6-85d7-8d550948a089" target="_blank">Tallinna Tehnikaülikooli magistritöö — maaklerilepingu ja maakleritasu õiguse analüüs (2014)</a></li>
+      <li><span class="source-tag">Tööstuse seisukoht</span><a href="https://arcovara.ee/et/blogi/118-kasulik-teada-head-vihjed/122381-evelyn-luik-kes-peab-tasuma-maakleritasu-uurilepingu-solmimisel" target="_blank">Arco Vara — "Kes peab tasuma maakleritasu üürilepingu sõlmimisel?" — isegi kinnisvarafirma tunnistab, et seaduse järgi maksab üürileandja</a></li>
+      <li><span class="source-tag">Rahvusvaheline</span><a href="https://www.gesetze-im-internet.de/englisch_wog/englisch_wog.html" target="_blank">Saksamaa Bestellerprinzip (2020) — seadus, mis keelas täpselt selle praktika. "Tellija maksab" põhimõte.</a></li>
+      <li><span class="source-tag">Kohtupraktika</span>Eestis puudub väljakujunenud kohtupraktika VÕS § 658 rakendamiseks eluruumi üürilepingute kontekstis. (Indrek Niklus, 2017) — see on põhjus, miks kampaania toimub.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">maakleritasu<span>.ee</span></div>
+      <div class="footer-meta">
+        Kampaania MTÜ Emale poolt<br>
+        <a href="https://mtuemale.ee" style="color:rgba(250,247,242,.6)">mtuemale.ee</a> · <a href="mailto:maakleritasu@proton.me" style="color:rgba(250,247,242,.6)">maakleritasu@proton.me</a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-label">Lehed</div>
+        <a href="#probleem">Probleem</a>
+        <a href="#kaebus">Esita kaebus</a>
+        <a href="#protsess">Juhend</a>
+        <a href="#fond">Toeta</a>
+        <a href="#allikad">Allikad</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Kampaaniad</div>
+        <a href="https://mtuemale.ee" class="highlight">mtuemale.ee</a>
+        <span>#maaklervaletab</span>
+        <span>#kartell</span>
+        <span>#esitasinkaebuse</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 MTÜ Emale</div>
+    <div>See veebileht ei paku juriidilist nõustamist. Kaebuse esitamisel soovitame vajadusel konsulteerida juristiga.</div>
+  </div>
+</footer>
+
+<!-- ADVOKAAT MODAL -->
+<div id="advokaat-modal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="document.getElementById('advokaat-modal').classList.remove('open')">×</button>
+    <h3>Võta ühendust</h3>
+    <p style="font-size:.88rem;color:var(--ink3);margin-bottom:1.5rem">Täida vorm — võtame sinuga ühendust 2 tööpäeva jooksul.</p>
+    <label class="adv-label">Sinu nimi *</label>
+    <input id="adv-nimi" type="text" class="adv-input" placeholder="Eesnimi Perenimi">
+    <label class="adv-label">Advokaadibüroo</label>
+    <input id="adv-büroo" type="text" class="adv-input" placeholder="Büroo nimi">
+    <label class="adv-label">E-post *</label>
+    <input id="adv-email" type="email" class="adv-input" placeholder="sinu@email.ee">
+    <label class="adv-label">Sõnum (vabatahtlik)</label>
+    <textarea id="adv-sonum" class="adv-input" placeholder="Miks see teema sind huvitab..."></textarea>
+    <button onclick="saadaAdvokaat()" class="btn-submit">Saada sõnum →</button>
+    <div id="adv-success" style="display:none;margin-top:1rem;background:#e8f7ef;border:1px solid #7ecb9c;border-radius:var(--radius);padding:1rem;color:#1a6638;text-align:center;font-weight:600">Sõnum saadetud! Võtame sinuga ühendust.</div>
+  </div>
+</div>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20)
+})
+
+// Generaator
+function genereeriKaebus(){
+  const maakler = document.getElementById('maakler-nimi').value.trim()
+  const firma = document.getElementById('maakler-firma').value.trim()
+  const kuupaev = document.getElementById('kuupaev').value.trim()
+  const summa = document.getElementById('summa').value.trim()
+  const linn = document.getElementById('linn').value.trim()
+  const kirjeldus = document.getElementById('kirjeldus').value.trim()
+  const nimi = document.getElementById('nimi').value.trim()
+
+  if(!firma && !maakler){ alert('Palun sisesta vähemalt maaklerifirma nimi.'); return }
+  if(!summa){ alert('Palun sisesta makstud tasu suurus.'); return }
+
+  const maaklerStr = maakler && firma ? `${maakler} (${firma})` : (firma || maakler || 'maakler (nimi teadmata)')
+  const nimeStr = nimi || '[Esitaja andmed lisatakse e-kirjas]'
+
+  const tekst = `Kellele: ${maaklerStr}
+Teema: Kaebus maakleritasu ebaseadusliku nõudmise kohta
+
+Austatud,
+
+Esitan kaebuse Tarbijakaitse ja Tehnilise Järelevalve Ametile (TTJA) ${maaklerStr} vastu, kes nõudis minult ebaseaduslikult maakleritasu üürikorteri vahendamise eest.
+
+KAEBUSE ASJAOLUD
+
+${kuupaev ? kuupaev + ' a' : 'A'}jastusel piirkonnas ${linn || '[linn]'} otsisin üürikorterit. Maakler ${maaklerStr} vahendas korteri üürilepingut üürileandja ja minu vahel.
+
+Maakler nõudis minult vahendustasu suuruses ${summa} eurot. Samal ajal pakkus maakler oma teenust üürileandjale tasuta — üürileandja oli maakleriteenuse tegelik tellija.
+
+${kirjeldus ? 'Lisainfo: ' + kirjeldus + '\n\n' : ''}ÕIGUSLIK ALUS
+
+Võlaõigusseaduse § 658 lg 1 kohaselt kohustub maakleritasu maksma käsundiandja — isik, kes maakleri palkas. Antud juhul oli käsundiandja üürileandja, mitte mina.
+
+Justiitsministeeriumi õiguspoliitika osakonna juhataja Indrek Nikluse seisukoha kohaselt (ERR, 2017) on eluruumi üürniku kohustamine maakleritasu maksma õiguslikult küsitav, kuna seaduse eesmärk on vabastada eluruumi üürnik kuludest, mis pole otseselt seotud eluruumi kasutamisega.
+
+Lisaks puudus mul tegelik valikuvabadus — maakleritasu maksmisest keeldumisel poleks korterit saanud.
+
+NÕUE
+
+Palun TTJA-l:
+1. Kontrollida ${maaklerStr} tegevuse vastavust VÕS § 658 lg 1 nõuetele
+2. Teha vajadusel ettekirjutus ebaseadusliku praktika lõpetamiseks
+3. Kaaluda haldusmenetluse alustamist
+
+Olen valmis esitama täiendavaid tõendeid (maksekinnitus, lepingud) järelepärimise korral.
+
+Lugupidamisega,
+${nimeStr}
+Kuupäev: ${new Date().toLocaleDateString('et-EE')}`
+
+  document.getElementById('kaebus-tekst').textContent = tekst
+  document.getElementById('modal').classList.add('open')
+}
+
+function sulgeModal(){
+  document.getElementById('modal').classList.remove('open')
+}
+
+function kopeeeri(){
+  navigator.clipboard.writeText(document.getElementById('kaebus-tekst').textContent).then(()=>{
+    const btn = document.querySelector('.btn-copy')
+    btn.textContent = 'Kopeeritud! ✓'
+    setTimeout(()=>{ btn.textContent = 'Kopeeri tekst lõikelauale' }, 2000)
+  })
+}
+
+document.getElementById('modal').addEventListener('click', function(e){
+  if(e.target === this) sulgeModal()
+})
+
+document.getElementById('advokaat-modal').addEventListener('click', function(e){
+  if(e.target === this) this.classList.remove('open')
+})
+
+function saadaAdvokaat(){
+  const nimi = document.getElementById('adv-nimi').value.trim()
+  const büroo = document.getElementById('adv-büroo').value.trim()
+  const email = document.getElementById('adv-email').value.trim()
+  const sonum = document.getElementById('adv-sonum').value.trim()
+  if(!nimi || !email){ alert('Palun sisesta nimi ja e-post.'); return }
+  const mailto = 'mailto:maakleritasu@proton.me?subject=Advokaat%20maakleritasu%20kaasusele%20%E2%80%94%20' +
+    encodeURIComponent(nimi) + '&body=' +
+    encodeURIComponent('Nimi: ' + nimi + '\nBüroo: ' + büroo + '\nE-post: ' + email + '\n\n' + sonum)
+  window.open(mailto)
+  document.getElementById('adv-success').style.display = 'block'
+}
+</script>
+</body>
+</html>
